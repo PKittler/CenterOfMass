@@ -1,9 +1,9 @@
-from django.urls import path
+from django.urls import include, path
 from . import views
 
 app_name = "data_manager"
 
-urlspatterns = [
+urlpatterns = [
     path('', views.IndexView.as_view(), name='index'),
     path('new/', views.NewCaseView, name="new_case"),
     path('<int:case_id>/', views.OverviewCaseView.as_view(), name="overview_case"),

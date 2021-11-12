@@ -44,7 +44,7 @@ def DeleteCaseView(request, case_id):
     return redirect("data_manager:index")
 
 
-class MasspointView(generic.ListView):
+class OverviewCaseView(generic.ListView):
     template_name = "data_manager/masspoints.html"
     content_object_name = "masspoints_list"
 

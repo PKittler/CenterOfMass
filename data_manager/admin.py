@@ -8,11 +8,11 @@ class MasspointInline(admin.TabularInline):
 
 
 class CaseAdmin(admin.ModelAdmin):
-    list_display = {'name', 'description'}
+    list_display = ('name', 'description')
 
     fieldsets = [
         (None, {'fields': ['name', 'description']}),
-        ('Axes', {'fields': ['label_x_min', 'label_x_max', 'label_y_min', 'label_y_max', 'label_z_min', 'label_z_max'],
+        ('Axes', {'fields': ['label_x_min', 'label_x_max', 'label_y_min', 'label_y_max', 'label_z_min', 'label_z_max',],
                   'classes': ['collapse']}),
     ]
 

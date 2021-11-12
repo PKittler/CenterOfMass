@@ -19,12 +19,12 @@ class EditCaseForm(forms.ModelForm):
 class AddMasspointForm(forms.ModelForm):
 
     class Meta:
-        model = Case
+        model = Masspoint
         fields = ('id', 'lastname', 'firstname', 'x_value', 'y_value', 'z_value', 'mass')
 
 
 class EditMasspointForm(forms.ModelForm):
 
     class Meta:
-        model = Case
+        model = Masspoint
         fields = ('id', 'lastname', 'firstname', 'x_value', 'y_value', 'z_value', 'mass')
