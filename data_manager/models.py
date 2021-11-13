@@ -21,7 +21,7 @@ class Masspoint(models.Model):
     x_value = models.IntegerField(default=0)
     y_value = models.IntegerField(default=0)
     z_value = models.IntegerField(default=0)
-    mass = models.FloatField(default=0)
+    mass = models.FloatField(default=1)
 
     def __str__(self):
         return self.lastname

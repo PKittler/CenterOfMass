@@ -64,7 +64,7 @@ def AddMasspointView(request, case_id):
 
     if request.method == "POST":
         masspoint = case.masspoint_set.create(lastname = request.POST["lastname"], firstname = request.POST["firstname"], x_value = request.POST["x_value"], y_value = request.POST["y_value"], z_value = request.POST["z_value"], mass = request.POST["mass"])
-        return redirect("data_manager:show_masspoints", case_id = case.id)
+        return redirect("data_manager:overview_case", case_id = case.id)
     else:
         form = AddMasspointForm()
         return  render(request, "data_manager/add_masspoint.html", {'form': form})
@@ -78,7 +78,7 @@ def EditMasspointView(request, case_id, masspoint_id):
         masspoint = form.save(commit=False)
         masspoint.save()
 
-        return redirect("data_manager:show_masspoints", case_id)
+        return redirect("data_manager:overview_case", case_id)
     else:
         form = EditMasspointForm(request.POST or None, instance = masspoint)
         return render(request, "data_manager/edit_masspoint.html", {'form': form})
