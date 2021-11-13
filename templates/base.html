@@ -1,0 +1,33 @@
+{% load static %}
+{% load bootstrap4 %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <title>Center of Mass</title>
+   <link href="{% static 'vendors/css/bootstrap.min.css' %}" rel="stylesheet">
+   <link rel="stylesheet" type="text/css" href="{% static 'general/styles.css' %}">
+   <script src="{% static 'vendors/js/xeogl.min.js' %}"/>
+</head>
+<body>
+   <div class="container-fluid">
+       <div class="row">
+           <div class="col-3">
+               <ul class="nav flex-column">
+                   <li class="nav-item">
+                       <a class="nav-link" href="{% url 'data_manager:index' %}">Manage Cases</a>
+                   </li>
+               </ul>
+           </div>
+           <div class="col-9">
+               {% block content %}
+               {% endblock %}
+           </div>
+       </div>
+   </div>
+
+   <script src="{% static 'vendors/js/jquery-3.6.0.min.js' %}"></script>
+   <script src="{% static 'vendors/js/bootstrap.min.js' %}"></script>
+</body>
+</html>
