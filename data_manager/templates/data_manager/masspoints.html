@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% load static %}
+
+
+{% block content %}
+   <div class="row">
+       <div class="col-12">
+         {% buttons %}
+             <a class="btn btn-success" href="/data_manager/{{ case_id }}/add/">Add</a>
+         {% endbuttons %}
+       </div>
+   </div>
+   <div class="row">
+       <div class="col-12">
+       {% for masspoint in masspoints_list %}
+        {% endfor %}
+           {% if masspoints_list %}
+
+               <table class="table">
+                   <thead>
+                       <tr>
+                           <th scope="col">#</th>
+                           <th scope="col">Last Name</th>
+                           <th scope="col">First Name</th>
+                           <th scope="col">X</th>
+                           <th scope="col">Y</th>
+                           <th scope="col">Z</th>
+                           <th scope="col">M</th>
+                           <th scope="col"></th>
+                           <th scope="col"></th>
+                       </tr>
+                   </thead>
+                   <tbody>
+                       {% for masspoint in masspoints_list %}
+                           <tr>
+                             <th scope="row">{{ masspoint.id }}</th>
+                             <td>{{ masspoint.lastname }}</td>
+                             <td>{{ masspoint.firstname }}</td>
+                             <td>{{ masspoint.x_value }}</td>
+                             <td>{{ masspoint.y_value }}</td>
+                             <td>{{ masspoint.z_value }}</td>
+                             <td>{{ masspoint.mass }}</td>
+                             <td>
+                                 {% buttons %}
+                                     <a class="btn btn-secondary" href="/data_manager/{{ masspoint.case_id }}/{{ masspoint.id }}/edit/">Edit</a>
+                                 {% endbuttons %}
+                             </td>
+                             <td>
+                                 {% buttons %}
+                                     <a class="btn btn-danger" href="/data_manager/{{ masspoint.case_id }}/{{ masspoint.id }}/delete/">Delete</a>
+                                 {% endbuttons %}
+                             </td>
+                           </tr>
+                       {% endfor %}
+                   </tbody>
+               </table>
+           {% else %}
+               <p>No masspoints are available.</p>
+           {% endif %}
+       </div>
+   </div>
+{% endblock %}
+
+
