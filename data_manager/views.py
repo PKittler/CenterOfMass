@@ -6,7 +6,7 @@ from .forms import NewCaseForm, EditCaseForm, AddMasspointForm, EditMasspointFor
 
 class IndexView(generic.ListView):
     template_name = "data_manager/index.html"
-    content_object_name = "latest_cases_list"
+    context_object_name = "latest_cases_list"
 
     def get_queryset(self):
         return Case.objects.order_by('name')
@@ -14,7 +14,7 @@ class IndexView(generic.ListView):
 
 def NewCaseView(request):
     if request.method == "POST":
-        form = NewCaseView(request.POST)
+        form = NewCaseForm(request.POST)
 
         if form.is_valid():
             form.save()
@@ -46,7 +46,7 @@ def DeleteCaseView(request, case_id):
 
 class OverviewCaseView(generic.ListView):
     template_name = "data_manager/masspoints.html"
-    content_object_name = "masspoints_list"
+    context_object_name = "masspoints_list"
 
     def get_queryset(self):
         return Masspoint.objects.filter(id = self.kwargs["case_id"])

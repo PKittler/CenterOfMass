@@ -7,13 +7,13 @@
    <div class="row">
        <div class="col-12">
          {% buttons %}
-             <a class="btn btn-success" href="/data_manager/new_case/">New</a>
+             <a class="btn btn-success" href="/data_manager/new/">New</a>
          {% endbuttons %}
        </div>
    </div>
    <div class="row">
        <div class="col-12">
-           {% if latest_cases_list %}
+           {% if latest_cases_list|length > 0 %}
 
                <table class="table">
                    <thead>
@@ -40,7 +40,7 @@
                              </td>
                              <td>
                                  {% buttons %}
-                                     <a class="btn btn-secondary" href="/data_manager/{{ case.id }}/masspoints/">Masspoints</a>
+                                     <a class="btn btn-secondary" href="/data_manager/{{ case.id }}">Masspoints</a>
                                  {% endbuttons %}
                              </td>
                              <td>
