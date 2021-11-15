@@ -86,12 +86,12 @@
 
                 {% for masspoint in masspoints_list %}
                 new xeogl.Mesh({
-                    position: [{{ masspoint.x_value }}, {{ masspoint.y_value }}, {{ masspoint.z_value }}],
+                    position: [{{ masspoint.x_value }} * Math.sin(((Math.atan({{ masspoint.y_value }} / {{ masspoint.z_value }}) / (2 * Math.PI)) * 360)) * Math.cos(((Math.atan({{ masspoint.y_value }} / {{ masspoint.x_value }}) / (2 * Math.PI)) * 360)), {{ masspoint.y_value }} * Math.sin(((Math.atan({{ masspoint.y_value }} / {{ masspoint.z_value }}) / (2 * Math.PI)) * 360)) * Math.sin(((Math.atan({{ masspoint.y_value }} / {{ masspoint.x_value }}) / (2 * Math.PI)) * 360)), {{ masspoint.z_value }} * Math.cos(((Math.atan({{ masspoint.y_value }} / {{ masspoint.z_value }}) / (2 * Math.PI)) * 360))],
                     scale: [{{ masspoint.mass }}, {{ masspoint.mass }}, {{ masspoint.mass }}],
                     rotation: [0, 0, 0],
                     geometry: Masspoint,
                     material: new xeogl.PhongMaterial({
-                        diffuse: [0.2 + 0.08 * (5 + {{ masspoint.x_value }}), 0.2 + 0.08 * (5 + {{ masspoint.y_value }}) , 0.2 + 0.08 * (5 + {{ masspoint.z_value }})]
+                        diffuse: [0.2 + 0.08 * (5 + {{ masspoint.x_value }} * Math.sin(((Math.atan({{ masspoint.y_value }} / {{ masspoint.z_value }}) / (2 * Math.PI)) * 360)) * Math.cos(((Math.atan({{ masspoint.y_value }} / {{ masspoint.x_value }}) / (2 * Math.PI)) * 360))), 0.2 + 0.08 * (5 + {{ masspoint.y_value }} * Math.sin(((Math.atan({{ masspoint.y_value }} / {{ masspoint.z_value }}) / (2 * Math.PI)) * 360)) * Math.sin(((Math.atan({{ masspoint.y_value }} / {{ masspoint.x_value }}) / (2 * Math.PI)) * 360))) , 0.2 + 0.08 * (5 + {{ masspoint.z_value }} * Math.cos(((Math.atan({{ masspoint.y_value }} / {{ masspoint.z_value }}) / (2 * Math.PI)) * 360)))]
                     })
                 })
                 {% if forloop.last %}
