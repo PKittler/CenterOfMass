@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% load static %}
+
+
+{% block content %}
+   <div class="row">
+       <div class="col-12">
+         {% buttons %}
+             <a class="btn btn-success" href="/data_manager/new/">New</a>
+         {% endbuttons %}
+       </div>
+   </div>
+   <div class="row">
+       <div class="col-12">
+           {% if latest_cases_list|length > 0 %}
+
+               <table class="table">
+                   <thead>
+                       <tr>
+                           <th scope="col">#</th>
+                           <th scope="col">Name</th>
+                           <th scope="col">Description</th>
+                           <th scope="col"></th>
+                           <th scope="col"></th>
+                           <th scope="col"></th>
+                           <th scope="col"></th>
+                       </tr>
+                   </thead>
+                   <tbody>
+                       {% for case in latest_cases_list %}
+                           <tr>
+                             <th scope="row">{{ case.id }}</th>
+                             <td>{{ case.name }}</td>
+                             <td>{{ case.description }}</td>
+                             <td>
+                                 {% buttons %}
+                                     <a class="btn btn-primary" href="/data_explorer/{{ case.id }}">Run</a>
+                                 {% endbuttons %}
+                             </td>
+                             <td>
+                                 {% buttons %}
+                                     <a class="btn btn-secondary" href="/data_manager/{{ case.id }}">Masspoints</a>
+                                 {% endbuttons %}
+                             </td>
+                             <td>
+                                 {% buttons %}
+                                     <a class="btn btn-secondary" href="/data_manager/{{ case.id }}/edit/">Edit</a>
+                                 {% endbuttons %}
+                             </td>
+                             <td>
+                                 {% buttons %}
+                                     <a class="btn btn-danger" href="/data_manager/{{ case.id }}/delete/">Delete</a>
+                                 {% endbuttons %}
+                             </td>
+                           </tr>
+                       {% endfor %}
+                   </tbody>
+               </table>
+           {% else %}
+               <p>No cases are available.</p>
+           {% endif %}
+       </div>
+   </div>
+{% endblock %}
+
