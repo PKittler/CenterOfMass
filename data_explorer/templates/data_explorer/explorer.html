@@ -1,0 +1,123 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% load static %}
+
+
+{% block content %}
+
+    <script>
+        var scene = xeogl.getDefaultScene();
+
+        var canvas = scene.canvas;
+
+        var container = document.getElementById("viewport");
+        container.appendChild(canvas.canvas);
+
+        var x_obj_axis = new xeogl.Geometry({
+            primitive: "lines",
+            positions: [
+                6.0, 0.0, 0.0, -6.0, 0.0, 0.0,
+            ],
+            indices: [
+                0,1,
+            ]
+        });
+
+        var y_obj_axis = new xeogl.Geometry({
+            primitive: "lines",
+            positions: [
+                0.0, 6.0, 0.0, 0.0, -6.0, 0.0,
+            ],
+            indices: [
+                0,1,
+            ]
+        });
+
+        var z_obj_axis = new xeogl.Geometry({
+            primitive: "lines",
+            positions: [
+                0.0, 0.0, 6.0, 0.0, 0.0, -6.0,
+            ],
+            indices: [
+                0,1,
+            ]
+        });
+
+        var Masspoint = new xeogl.SphereGeometry({
+            radius: 0.1,
+            heightSegments: 60,
+            widthSegments: 60
+        });
+
+        var MassObject = new xeogl.Group({
+
+            id: "DataSphere",
+            rotation: [0, 0, 0],
+            position: [0, 0, 0],
+            scale: [1, 1, 1],
+
+            children: [
+                new xeogl.Mesh({
+                    geometry: x_obj_axis,
+                    material: new xeogl.PhongMaterial({
+                        emissive: [1,0,0],
+                        diffuse: [1, 0.0, 0.0],
+                        lineWidth: 10
+                    })
+                }),
+
+                new xeogl.Mesh({
+                    geometry: y_obj_axis,
+                    material: new xeogl.PhongMaterial({
+                        emissive: [0,1,0],
+                        diffuse: [0.0, 1.0, 0.0],
+                        lineWidth: 10
+                    })
+                }),
+
+                new xeogl.Mesh({
+                    geometry: z_obj_axis,
+                    material: new xeogl.PhongMaterial({
+                        emissive: [0,0,1],
+                        diffuse: [0.0, 0.0, 1.0],
+                        lineWidth: 10
+                    })
+                }),
+
+                {% for masspoint in masspoints_list %}
+                new xeogl.Mesh({
+                    position: [{{ masspoint.x_value }}, {{ masspoint.y_value }}, {{ masspoint.z_value }}],
+                    scale: [{{ masspoint.mass }}, {{ masspoint.mass }}, {{ masspoint.mass }}],
+                    rotation: [0, 0, 0],
+                    geometry: Masspoint,
+                    material: new xeogl.PhongMaterial({
+                        diffuse: [0.2 + 0.08 * (5 + {{ masspoint.x_value }}), 0.2 + 0.08 * (5 + {{ masspoint.y_value }}) , 0.2 + 0.08 * (5 + {{ masspoint.z_value }})]
+                    })
+                })
+                {% if forloop.last %}
+                {% else %}
+                    ,
+                {% endif %}
+                {% endfor %}
+
+            ]
+        });
+
+
+        var camera = MassObject.scene.camera;
+
+        camera.zoom(15);
+
+        new xeogl.CameraControl({});
+
+        new xeogl.AxisHelper({
+                camera: scene.camera,
+                size: [200, 200],
+                visible: true
+        });
+
+    </script>
+
+{% endblock %}
+
+

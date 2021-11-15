@@ -18,9 +18,9 @@ class Masspoint(models.Model):
     case = models.ForeignKey(Case, on_delete=models.CASCADE)
     firstname = models.CharField(max_length=20)
     lastname = models.CharField(max_length=20)
-    x_value = models.IntegerField(default=0)
-    y_value = models.IntegerField(default=0)
-    z_value = models.IntegerField(default=0)
+    x_value = models.FloatField(default=0)
+    y_value = models.FloatField(default=0)
+    z_value = models.FloatField(default=0)
     mass = models.FloatField(default=1)
 
     def __str__(self):
