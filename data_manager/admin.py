@@ -12,7 +12,7 @@ class CaseAdmin(admin.ModelAdmin):
 
     fieldsets = [
         (None, {'fields': ['name', 'description']}),
-        ('Axes', {'fields': ['label_x_min', 'label_x_max', 'label_y_min', 'label_y_max', 'label_z_min', 'label_z_max',],
+        ('Axes', {'fields': ['label_x_min', 'label_x_max', 'label_y_min', 'label_y_max', 'label_z_min', 'label_z_max'],
                   'classes': ['collapse']}),
     ]
 

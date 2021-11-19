@@ -16,14 +16,14 @@
     <body>
        <div class="container-fluid">
            <div class="row">
-               <div class="col-3">
+               <div class="col-2">
                    <ul class="nav flex-column">
                        <li class="nav-item">
                            <a class="nav-link" href="{% url 'data_manager:index' %}">Manage Cases</a>
                        </li>
                    </ul>
                </div>
-               <div id="viewport" class="col-9">
+               <div id="viewport" class="col-10">
                    {% block content %}
                    {% endblock %}
                </div>
