@@ -1,7 +1,6 @@
 from django.contrib import admin
 from .models import Case, Masspoint
 
-
 class MasspointInline(admin.TabularInline):
     model = Masspoint
     extra = 1

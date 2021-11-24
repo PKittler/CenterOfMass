@@ -1,7 +1,8 @@
 from django.shortcuts import get_object_or_404, render, redirect
 from django.views import generic
-from .models import Case, Masspoint
-from .forms import NewCaseForm, EditCaseForm, AddMasspointForm, EditMasspointForm
+from django.urls import reverse_lazy
+from .models import Case, Masspoint, CSV_masspoints_file
+from .forms import NewCaseForm, EditCaseForm, AddMasspointForm, EditMasspointForm, ImportMasspointsForm
 
 
 class IndexView(generic.ListView):
@@ -68,6 +69,15 @@ def AddMasspointView(request, case_id):
     else:
         form = AddMasspointForm()
         return  render(request, "data_manager/add_masspoint.html", {'form': form})
+
+def ImportMasspointsView(request, case_id):
+
+    if request.method == "POST":
+        current_file = CSV_masspoints_file.objects.create(case = case_id, upload_file = request.POST["upload_file"], upload_date = request.POST["upload_date"])
+        return redirect("data_manager:overview_case", case_id = case_id)
+    else:
+        form = ImportMasspointsForm()
+        return  render(request, "data_manager/import_masspoints.html", {'form': form})
 
 
 def EditMasspointView(request, case_id, masspoint_id):

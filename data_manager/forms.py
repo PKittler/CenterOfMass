@@ -23,6 +23,11 @@ class AddMasspointForm(forms.ModelForm):
         fields = ('id', 'lastname', 'firstname', 'x_value', 'y_value', 'z_value', 'mass')
 
 
+class ImportMasspointsForm(forms.Form):
+
+    csv_data = forms.Textarea()
+
+
 class EditMasspointForm(forms.ModelForm):
 
     class Meta:

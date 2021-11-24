@@ -104,3 +104,11 @@ class Masspoint(models.Model):
     y_calc = property(calculate_y)
     z_calc = property(calculate_z)
 
+
+class CSV_masspoints_file(models.Model):
+    case = models.ForeignKey(Case, on_delete=models.CASCADE)
+    upload_file = models.FileField(null=True, blank=True,upload_to='media')
+    upload_date = models.DateTimeField(auto_now_add = True)
+
+    def __str__(self):
+        return self.case.id
